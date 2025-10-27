@@ -13,45 +13,72 @@ namespace Calculator
             string input;
             do
             {
-                Console.WriteLine("Введите первое число: ");
-                int.TryParse(Console.ReadLine(), out int num_1 );
+                double[] array = new double[] { };
 
-                Console.WriteLine("Введите второе число: ");
-                int.TryParse(Console.ReadLine(), out int num_2);
+                Console.WriteLine("Введите числа: ");
+
+                input = Console.ReadLine();
+
+                string[] input_2 = input.Split(' ');
+
+                array = new double[input_2.Length];
+
+                for (int i = 0; i < input_2.Length; i++)
+                {
+                    array[i] = Convert.ToDouble(input_2[i]);
+                }
 
                 Console.WriteLine("Введите арифметическое действие: + - * / : ");
                 string sign = Console.ReadLine();
-               
-                int result;
+
+                double result = array[0];
+
                 switch (sign)
-                { 
+                {
                     case "+":
-                        Console.WriteLine($"Cумма чисел : { result = num_1 + num_2} ");
+                        for (int j = 1; j < array.Length; j++)
+                        {
+                            result += array[j];
+                        }
+                        Console.WriteLine($"Cумма чисел : {result} ");
                         break;
-                    case "-": 
-                        Console.WriteLine($"Разность чисел : {result = num_1 - num_2} ");
+
+                    case "-":
+                        for (int j = 1; j < array.Length; j++)
+                        {
+                            result -= array[j];
+                        }
+                        Console.WriteLine($"Разность чисел : {result} ");
                         break;
+
                     case "*":
-                        Console.WriteLine($"Произведение чисел : {result = num_1 * num_2} ");
+                        for (int j = 1; j < array.Length; j++)
+                        {
+                            result *= array[j];
+                        }
+                        Console.WriteLine($"Произведение чисел : {result} ");
                         break;
+
                     case "/":
                         try
                         {
-                          Console.WriteLine($"Деление чисел : {result = num_1 / num_2} ");
+                            for (int j = 1; j < array.Length; j++)
+                            {
+                                result /= array[j];
+                            }
+                            Console.WriteLine($"Деление чисел : {result } ");
                         }
-                        catch(DivideByZeroException)
+                        catch (DivideByZeroException)
                         {
-                          Console.WriteLine("Деление на 0 не возможно!");
-                        }                                       
-                        break;                      
+                            Console.WriteLine("Деление на 0 не возможно!");
+                        }
+                        break;
                 }
-                Console.WriteLine("При выходе наберите - esc: ");
-                input = Console.ReadLine();
 
-            } while(input !="esc");
+                    Console.WriteLine("При выходе наберите - esc: ");
+                    input = Console.ReadLine();                
 
-
-
+            } while (input != "esc");
         }
     }
 }
